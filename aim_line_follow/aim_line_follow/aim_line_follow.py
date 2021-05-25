@@ -1,6 +1,7 @@
+from cv_bridge.core import CvBridge
 import rclpy
 from rclpy.node import Node
-
+import copy
 from rclpy.exceptions import ParameterNotDeclaredException
 from rcl_interfaces.msg import Parameter
 from rcl_interfaces.msg import ParameterType
@@ -14,11 +15,24 @@ from nxp_cup_interfaces.msg import PixyVector
 from time import sleep
 from datetime import datetime
 import numpy as np
+from rclpy.qos import qos_profile_sensor_data
+import cv2
+import sensor_msgs.msg
+
 
 class LineFollow(Node):
 
     def __init__(self):
         super().__init__('aim_line_follow')
+
+        #image_variables
+        pyramid_down_descriptor = ParameterDescriptor(
+            type=ParameterType.PARAMETER_INTEGER,
+            description='Number of times to pyramid image down.')
+        
+        self.declare_parameter("pyramid_down", 2, 
+            pyramid_down_descriptor)
+        
 
         #variables
         self.speed_vector = Vector3()
@@ -27,7 +41,9 @@ class LineFollow(Node):
         self.axes = [0,0,0,0,0,0,0] 
         self.speed =0.0
         self.steer = 0.0
-
+        self.pyrDown = self.get_parameter("pyramid_down").value
+        self.bridge = CvBridge()
+        self.cameraImageTopic = '/trackImage0/image_raw'
        
 
         self.camera_vector_topic = '/cupcar0/PixyVector'
@@ -39,16 +55,18 @@ class LineFollow(Node):
             self.listener_callback,
             10)
         
-
-        # Subscribers
         self.joy_subscriber = self.create_subscription(
             Joy,
             '/joy',
             self.joy_callback,
             10)
 
-        
-        
+        self.imageSub = self.create_subscription(sensor_msgs.msg.Image, 
+                    self.cameraImageTopic, 
+                    self.pixyImageCallback, 
+                    qos_profile_sensor_data)
+                #/trackImage0/image_raw
+                
 
         # Publishers
         self.cmd_vel_publisher = self.create_publisher(Twist, '/cupcar0/cmd_vel', 10)
@@ -76,6 +94,20 @@ class LineFollow(Node):
         print(self.speed)
         
 
+    def pixyImageCallback(self,msg):
+         # Scene from subscription callback
+        scene = self.bridge.imgmsg_to_cv2(msg, "bgr8")
+
+        #deep copy and pyramid down image to reduce resolution
+        scenePyr = copy.deepcopy(scene)
+        if self.pyrDown > 0:
+            for i in range(self.pyrDown):
+                scenePyr = cv2.pyrDown(scenePyr)
+        sceneDetect = copy.deepcopy(scenePyr)
+        print(np.shape(sceneDetect))
+
+
+
     def listener_callback(self, msg):
         #TODO
         
@@ -91,7 +123,6 @@ def main(args=None):
     rclpy.init(args=args)
 
     line_follow = LineFollow()
-
     rclpy.spin(line_follow)
 
     line_follow.destroy_node()
