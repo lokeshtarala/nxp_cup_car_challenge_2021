@@ -1,0 +1,10 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/greyhat/ros2ws/build/nxp_cup_vision",
+        "/home/greyhat/ros2ws/install/nxp_cup_vision/lib/python3.8/site-packages",
+        "/home/greyhat/ros2ws/build/aim_line_follow",
+        "/home/greyhat/ros2ws/install/aim_line_follow/lib/python3.8/site-packages",
+        "/home/greyhat/ros2ws/install/nxp_cup_interfaces/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}
