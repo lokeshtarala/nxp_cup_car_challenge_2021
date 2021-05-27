@@ -18,7 +18,9 @@ import numpy as np
 from rclpy.qos import qos_profile_sensor_data
 import cv2
 import sensor_msgs.msg
-
+import reset
+from nav_msgs.msg import Odometry 
+from geometry_msgs.msg import Point
 
 class LineFollow(Node):
 
@@ -38,6 +40,7 @@ class LineFollow(Node):
         self.speed_vector = Vector3()
         self.steer_vector = Vector3()
         self.cmd_vel_car = Twist()
+        self.position = Point()
         self.axes = [0,0,0,0,0,0,0] 
         self.speed =0.0
         self.steer = 0.0
@@ -66,6 +69,13 @@ class LineFollow(Node):
                     self.pixyImageCallback, 
                     qos_profile_sensor_data)
                 #/trackImage0/image_raw
+            
+        self.pose_subscriber = self.create_subscription(
+            Odometry,
+            '/cupcar0/odom',
+            self.odom_callback,
+            10)
+
                 
 
         # Publishers
@@ -81,6 +91,10 @@ class LineFollow(Node):
         # self.i = 0
 
     
+    def odom_callback(self,msg):
+        self.position = msg.pose.pose.position
+        # print(f"present position: {self.position}")
+
 
     # def timer_callback(self):
     #     #TODO
@@ -90,8 +104,8 @@ class LineFollow(Node):
         self.speed = (self.speed )*1.5  
         self.steer = self.axes[3]
         self.steer = (self.steer + 1.0)*0.65 - 0.65
-        print(self.steer)
-        print(self.speed)
+        # print(self.steer)
+        # print(self.speed)
         
 
     def pixyImageCallback(self,msg):
@@ -104,7 +118,8 @@ class LineFollow(Node):
             for i in range(self.pyrDown):
                 scenePyr = cv2.pyrDown(scenePyr)
         sceneDetect = copy.deepcopy(scenePyr)
-        print(np.shape(sceneDetect))
+        # print(sceneDetect)
+        # print(np.shape(sceneDetect))
 
 
 
@@ -120,6 +135,7 @@ class LineFollow(Node):
         self.cmd_vel_publisher.publish(self.cmd_vel_car)
 
 def main(args=None):
+    
     rclpy.init(args=args)
 
     line_follow = LineFollow()
