@@ -1,18 +1,19 @@
 import numpy as np
-from keras.models import Sequential
-import keras
+from tensorflow.keras.models import Sequential
+#import keras
 import tensorflow as tf
-from tensorflow.keras.layers import Input,Dense,Activation,ZeroPadding2D,BatchNormalization,Flatten,Conv2D,MaxPool2D,Dropout,Reshape,Add,Conv2DTranspose,Concatenate,Lambda
-from keras.layers import LeakyReLU
+from tensorflow.keras.layers import Layer,InputLayer,Dense,Activation,ZeroPadding2D,BatchNormalization,Flatten,Conv2D,MaxPool2D,Dropout,Reshape,Add,Conv2DTranspose,Concatenate,Lambda
+from tensorflow.keras.layers import LeakyReLU
 from tensorflow.keras.models import Model
 import tensorflow.keras.backend as K
-from keras.callbacks import ModelCheckpoint
+from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.models import load_model
 import cv2
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import matplotlib.patches as patches
+from tensorflow.python.keras.engine.input_layer import Input
 import tensorflow_probability as tfp
 
 
@@ -28,7 +29,7 @@ def clipSpeed(val):
 
 def value_function():
     model = Sequential()
-    model.add(Input(shape=(64,64,3)))
+    model.add(InputLayer(input_shape=(64,64,3)))
     #1*1 layer
     model.add(Conv2D(3,1,activation="elu"))
     
@@ -70,8 +71,8 @@ def value_function():
     return model
 
 
-def policy(input_shape):
-    X_input=Input(input_shape)
+def policy():
+    X_input=Input(shape = (64,64,3))
     
     x = Conv2D(3,1,activation="elu")(X_input)
     
@@ -118,4 +119,3 @@ def policy(input_shape):
     return model 
     
 
-print(1)
