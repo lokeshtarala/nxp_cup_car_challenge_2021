@@ -22,7 +22,7 @@ import sys
 import os
 # from .modules_python import modelAgent
 
-# from .modules_python import simulationSettings
+from .modules_python import simulationSettings
 
 
 import math
@@ -341,11 +341,14 @@ class LineFollow(Node):
             # target = reward + gamma*current_V
             # self.td_error = target - prev_V
             # value_model.fit(x= self.prev_state, y = target)
-            losses={'speed':self.policy_loss(self.muSpeed,self.sigmaSpeed,self.td_error),'steer':self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSteer":policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSteer":policy_loss(self.muSteer,self.sigmaSteer,self.td_error)}
-            lossWeights={'speed':1,'steer':1,"muSpeed":0,"sigmaSpeed":0,"muSteer":0,"sigmaSteer":0}
-            self.policy_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),loss=losses,loss_weights=lossWeights)
-            self.policy_model.fit(self.prev_state,[np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1)])
+            # losses={'speed':self.policy_loss(self.muSpeed,self.sigmaSpeed,self.td_error),'steer':self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSteer":policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSteer":policy_loss(self.muSteer,self.sigmaSteer,self.td_error)}
+            # lossWeights={'speed':1,'steer':1,"muSpeed":0,"sigmaSpeed":0,"muSteer":0,"sigmaSteer":0}
+            # self.policy_model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),loss=losses,loss_weights=lossWeights)
+            # self.policy_model.fit(self.prev_state,[np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1)])
             #reset gazebo
+
+
+            self.iteration += 1
             self.rewards = 0
             self.resetWorld()
             self.new_episode = True
@@ -354,22 +357,31 @@ class LineFollow(Node):
             self.prev_pose.z = 0.394
 
         if(num_vectors == 1):
-            print("number of vectors==1 ")
-            reward = -1500
-            value_model = modelAgent.value_function()
-            value_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate=0.0001),loss=tf.keras.losses.MeanSquaredError())
+            # print("number of vectors==1 ")
+            # reward = -1500
+
+            cv2.imwrite(f"{self.new_episode}_{self.iteration}_{num_vectors}.jpeg",self.passedImage)
+            f = self.drive.CreateFile({'title': f"{self.new_episode}_{self.iteration}_{num_vectors}.jpeg",'parents':[{'id':'1U1tIilfX2rzKiQidcmEQEgaATi-Y2trt'}]})
+            f.SetContentFile(f"/home/basilv/ros2ws/src/aim_line_follow/aim_line_follow/{self.new_episode}_{self.iteration}_{num_vectors}.jpeg")
+            f.Upload()
+
+            # value_model = modelAgent.value_function()
+            # value_model.compile(optimizer= tf.keras.optimizers.Adam(learning_rate=0.0001),loss=tf.keras.losses.MeanSquaredError())
         
-            prev_V = value_model.predict(self.prev_state)
-            current_V = value_model.predict(self.passedImage)
-            target = reward + gamma*current_V
-            self.td_error = target - prev_V
-            value_model.fit(x= self.prev_state, y = target)
-            losses={'speed':self.policy_loss(self.muSpeed,self.sigmaSpeed,self.td_error),'steer':self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSteer":self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSteer":self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error)}
-            lossWeights={'speed':1,'steer':1,"muSpeed":0,"sigmaSpeed":0,"muSteer":0,"sigmaSteer":0}
-            self.policy_model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.0001),loss=losses,loss_weights=lossWeights)
-            self.policy_model.fit(self.prev_state,[np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1)])
+            # prev_V = value_model.predict(self.prev_state)
+            # current_V = value_model.predict(self.passedImage)
+            # target = reward + gamma*current_V
+            # self.td_error = target - prev_V
+            # value_model.fit(x= self.prev_state, y = target)
+            
+            # losses={'speed':self.policy_loss(self.muSpeed,self.sigmaSpeed,self.td_error),'steer':self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSpeed" :self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"muSteer":self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error),"sigmaSteer":self.policy_loss(self.muSteer,self.sigmaSteer,self.td_error)}
+            # lossWeights={'speed':1,'steer':1,"muSpeed":0,"sigmaSpeed":0,"muSteer":0,"sigmaSteer":0}
+            # self.policy_model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.0001),loss=losses,loss_weights=lossWeights)
+            # self.policy_model.fit(self.prev_state,[np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1),np.array(0.0).reshape(-1,1)])
             #reset gazebo
             
+
+            self.iteration += 1
             self.resetworld()
             self.rewards = 0
             self.new_episode = True
@@ -444,7 +456,7 @@ class LineFollow(Node):
                         breakFlag = False
                         break
                 
-                self.new_episode = False
+
                 self.prev_state = self.passedImage
                 self.new_episode = False
                 self.prev_pose = self.position
