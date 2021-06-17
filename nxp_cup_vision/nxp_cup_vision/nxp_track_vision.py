@@ -1,21 +1,14 @@
 #!/usr/bin/env python3
-import os
-import sys
 import copy
-import re
-import importlib
 import numpy as np
 import rclpy
 from rclpy.qos import qos_profile_sensor_data
 from rclpy.node import Node
-from rclpy.exceptions import ParameterNotDeclaredException
-from rcl_interfaces.msg import Parameter
 from rcl_interfaces.msg import ParameterType
 from rcl_interfaces.msg import ParameterDescriptor
 import sensor_msgs.msg
 import nxp_cup_interfaces.msg
 from cv_bridge import CvBridge
-from rclpy.qos import QoSProfile
 import cv2
 if cv2.__version__ < "4.0.0":
     raise ImportError("Requires opencv >= 4.0, "
@@ -73,6 +66,8 @@ class NXPTrackVision(Node):
 
         self.mask_ratio_array = self.get_parameter("mask_ratio_array").value
         
+        self.rawImage = None
+        
 
         #setup CvBridge
         self.bridge = CvBridge()
@@ -102,8 +97,7 @@ class NXPTrackVision(Node):
 
         #Publishers
         self.debugDetectionImagePub = self.create_publisher(sensor_msgs.msg.Image,
-            '/{:s}'.format(self.debugImageTopic), 0)
-        
+            '/{:s}'.format(self.debugImageTopic),0)
         self.PixyVectorPub = self.create_publisher(nxp_cup_interfaces.msg.PixyVector,
             '{:s}/PixyVector'.format(self.namespaceTopic), 0)
         
@@ -142,6 +136,7 @@ class NXPTrackVision(Node):
             (self.pX0, self.pY0, self.pX1, self.pY1) = (2,3,0,1)
 
     def findLines(self, passedImage):
+      
         
         self.timeStamp = self.get_clock().now().nanoseconds
         
@@ -422,6 +417,7 @@ class NXPTrackVision(Node):
         #Pixy message for publication
         if (len(pixyScaledVectorArray) == 0):
             PixyVector_msg = nxp_cup_interfaces.msg.PixyVector()
+            PixyVector_msg.raw_image = self.rawImage
             PixyVector_msg.timestamp = int(self.timeStamp)
             PixyVector_msg.m0_x0 = int(0)
             PixyVector_msg.m0_y0 = int(0)
@@ -435,6 +431,7 @@ class NXPTrackVision(Node):
         if (len(pixyScaledVectorArray) > 0):
             PixyVector_msg = nxp_cup_interfaces.msg.PixyVector()
             PixyVector_msg.timestamp = int(self.timeStamp)
+            PixyVector_msg.raw_image = self.rawImage
             PixyVector_msg.m0_x0 = int(pixyScaledVectorArray[0][self.pX0])
             PixyVector_msg.m0_y0 = int(pixyScaledVectorArray[0][self.pY0])
             PixyVector_msg.m0_x1 = int(pixyScaledVectorArray[0][self.pX1])
@@ -448,6 +445,7 @@ class NXPTrackVision(Node):
                 PixyVector_msg.m1_y0 = int(pixyScaledVectorArray[1][self.pY0])
                 PixyVector_msg.m1_x1 = int(pixyScaledVectorArray[1][self.pX1])
                 PixyVector_msg.m1_y1 = int(pixyScaledVectorArray[1][self.pY1])
+            
             self.PixyVectorPub.publish(PixyVector_msg)
 
         return(returnedImageDebug)
@@ -457,6 +455,7 @@ class NXPTrackVision(Node):
         
         # Scene from subscription callback
         scene = self.bridge.imgmsg_to_cv2(data, "bgr8")
+        
 
         #deep copy and pyramid down image to reduce resolution
         scenePyr = copy.deepcopy(scene)
@@ -464,14 +463,16 @@ class NXPTrackVision(Node):
             for i in range(self.pyrDown):
                 scenePyr = cv2.pyrDown(scenePyr)
         sceneDetect = copy.deepcopy(scenePyr)
+        self.rawImage = data
 
         #find lines function
         sceneDetected = self.findLines(sceneDetect)
         
         if self.debug:
-            #publish debug image
+            #publish debug image        
             msg = self.bridge.cv2_to_imgmsg(sceneDetected, "bgr8")
             msg.header.stamp = data.header.stamp
+            
             self.debugDetectionImagePub.publish(msg)
 
 def main(args=None):
