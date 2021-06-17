@@ -6,10 +6,8 @@
         "limitSymbolsToIncludedHeaders": true
       },
       "includePath": [
-        "/opt/ros/noetic/include/**",
-        "/home/greyhat/robocon_2021/devel/include/**",
-        "/home/greyhat/robocon_2021/src/rosserial/rosserial_server/include/**",
-        "/home/greyhat/robocon_2021/src/rosserial/rosserial_test/include/**",
+        "/home/greyhat/ros2ws/install/nxp_cup_interfaces/include/**",
+        "/opt/ros/foxy/include/**",
         "/usr/include/**"
       ],
       "name": "ROS"

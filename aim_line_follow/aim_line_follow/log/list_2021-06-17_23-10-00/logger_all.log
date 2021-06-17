@@ -1,0 +1,68 @@
+[0.820s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow']
+[0.820s] DEBUG:colcon:Parsed command line arguments: Namespace(base_paths=['/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow'], build_base='build', ignore_user_meta=False, log_base=None, log_level=None, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7f5675dcb280>>, metas=['./colcon.meta'], names_only=False, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, paths=None, paths_only=True, topological_graph=False, topological_graph_density=False, topological_graph_dot=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, topological_graph_legend=False, topological_order=False, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7f5675dcb280>, verb_name='list', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f5675c0ca00>)
+[0.895s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.895s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.895s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.895s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.896s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.896s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow'
+[0.896s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extensions ['ignore', 'ignore_ament_install']
+[0.896s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'ignore'
+[0.896s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'ignore_ament_install'
+[0.896s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extensions ['colcon_pkg']
+[0.897s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'colcon_pkg'
+[0.897s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extensions ['colcon_meta']
+[0.897s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'colcon_meta'
+[0.897s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extensions ['ros']
+[0.897s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'ros'
+[0.938s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extensions ['cmake', 'python']
+[0.938s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'cmake'
+[0.938s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'python'
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extensions ['python_setup_py']
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow) by extension 'python_setup_py'
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.939s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'ignore'
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'ignore_ament_install'
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extensions ['colcon_pkg']
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'colcon_pkg'
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extensions ['colcon_meta']
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'colcon_meta'
+[0.940s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extensions ['ros']
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'ros'
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extensions ['cmake', 'python']
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'cmake'
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'python'
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extensions ['python_setup_py']
+[0.941s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/__pycache__) by extension 'python_setup_py'
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/log) by extensions ['ignore', 'ignore_ament_install']
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/log) by extension 'ignore'
+[0.942s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/log) ignored
+[0.943s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extensions ['ignore', 'ignore_ament_install']
+[0.943s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'ignore'
+[0.943s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'ignore_ament_install'
+[0.943s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extensions ['colcon_pkg']
+[0.944s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'colcon_pkg'
+[0.944s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extensions ['colcon_meta']
+[0.944s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'colcon_meta'
+[0.944s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extensions ['ros']
+[0.944s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'ros'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extensions ['cmake', 'python']
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'cmake'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'python'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extensions ['python_setup_py']
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python) by extension 'python_setup_py'
+[0.945s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'ignore'
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'ignore_ament_install'
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extensions ['colcon_pkg']
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'colcon_pkg'
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extensions ['colcon_meta']
+[0.946s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'colcon_meta'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extensions ['ros']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'ros'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extensions ['cmake', 'python']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'cmake'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'python'
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extensions ['python_setup_py']
+[0.947s] Level 1:colcon.colcon_core.package_identification:_identify(/home/greyhat/ros2ws/src/aim_line_follow/aim_line_follow/modules_python/__pycache__) by extension 'python_setup_py'
+[0.948s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults

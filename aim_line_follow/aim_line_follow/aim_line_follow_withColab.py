@@ -58,9 +58,9 @@ from std_srvs.srv import Empty
 from cv_bridge.core import CvBridge
 
 
-from pydrive.drive import GoogleDrive
-from pydrive.auth import GoogleAuth
-import os
+# from pydrive.drive import GoogleDrive
+# from pydrive.auth import GoogleAuth
+# import os
 
 
 #nav_msgs/msg/Odometry
@@ -220,9 +220,9 @@ class LineFollow(Node):
         # self.policy_model = modelAgent.policy()
 
         #setup drive
-        gauth = GoogleAuth()
-        gauth.LocalWebserverAuth()       
-        self.drive = GoogleDrive(gauth)
+        # gauth = GoogleAuth()
+        # gauth.LocalWebserverAuth()       
+        # self.drive = GoogleDrive(gauth)
 
 
 
@@ -314,6 +314,7 @@ class LineFollow(Node):
         steer = 0
         speed = 0
         num_vectors = self.get_num_vectors(msg)
+        cv2.imwrite("passed.jpeg",self.passedImage)
         self.passedImage = np.array(self.passedImage)
         # print("image converted to numpy array")
         self.passedImage = cv2.resize(self.passedImage,(64,64))
